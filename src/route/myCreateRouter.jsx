@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
+import CoffeeUpdate from "../pages/Update/CoffeeUpdate";
 
 const myCreateRouter = createBrowserRouter([
     {
@@ -14,11 +15,17 @@ const myCreateRouter = createBrowserRouter([
         children:([
             {
                 path:'/',
-                element:<Home/>
+                element:<Home/>,
+                loader:() => fetch('http://localhost:5000/coffee')
             },
             {
                 path:'/addCoffee',
                 element:<AddCoffee/>
+            },
+            {
+                path:'/updateCoffee/:id',
+                element:<CoffeeUpdate/>,
+                loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
             },
             {
                 path:'/login',
